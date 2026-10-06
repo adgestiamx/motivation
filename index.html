@@ -1,377 +1,943 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
 
-<title>Mensaje del Día</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<style>
+  <title>Mensaje del día · Adgestia</title>
+
+  <style>
+
     * {
-        box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
     }
 
     body {
-        margin: 0;
-        min-height: 100vh;
-        font-family: Georgia, "Times New Roman", serif;
-        background: #fdf6f2;
-        color: #4a3428;
-        padding: 30px 18px;
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(248, 221, 226, 0.65),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 90% 90%,
+          rgba(239, 213, 199, 0.55),
+          transparent 30%
+        ),
+        #FDF6F2;
+
+      font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 24px;
     }
 
-    .galeria {
-        max-width: 1000px;
-        margin: auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 28px;
+
+    /* =========================================
+       CONTENEDOR PRINCIPAL
+       ========================================= */
+
+    .contenedor {
+      width: 100%;
+      max-width: 760px;
     }
 
-    /* =========================
-       TARJETA BASE
-       ========================= */
+
+    /* =========================================
+       TARJETA
+       ========================================= */
 
     .tarjeta {
-        position: relative;
-        min-height: 330px;
-        padding: 55px 38px 42px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        overflow: hidden;
+      position: relative;
+
+      width: 100%;
+
+      background: #FFF9F6;
+
+      border: 1px solid #D8A7A7;
+
+      border-radius: 30px;
+
+      padding:
+        58px
+        55px
+        48px;
+
+      text-align: center;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 20px 55px rgba(74, 52, 40, 0.12);
+
+      transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
     }
 
-    .etiqueta {
-        font-family: Arial, sans-serif;
-        font-size: 11px;
-        letter-spacing: 3px;
-        text-transform: uppercase;
-        margin-bottom: 25px;
-        opacity: .75;
+
+    /* =========================================
+       DECORACIONES
+       ========================================= */
+
+    .tarjeta::before {
+      content: "";
+
+      position: absolute;
+
+      width: 220px;
+      height: 220px;
+
+      background: #F8DDE2;
+
+      border-radius: 50%;
+
+      top: -120px;
+      left: -90px;
+
+      opacity: 0.7;
     }
+
+
+    .tarjeta::after {
+      content: "";
+
+      position: absolute;
+
+      width: 190px;
+      height: 190px;
+
+      background: #EFD5C7;
+
+      border-radius: 50%;
+
+      bottom: -110px;
+      right: -80px;
+
+      opacity: 0.55;
+    }
+
+
+    /* =========================================
+       MOÑO
+       ========================================= */
+
+    .moño {
+      position: relative;
+
+      z-index: 2;
+
+      font-size: 46px;
+
+      line-height: 1;
+
+      margin-bottom: 16px;
+
+      animation:
+        aparecer 0.7s ease;
+    }
+
+
+    /* =========================================
+       BUENOS DÍAS
+       ========================================= */
+
+    .titulo {
+      position: relative;
+
+      z-index: 2;
+
+      color: #884D3A;
+
+      font-size: 27px;
+
+      font-weight: bold;
+
+      letter-spacing: 1px;
+
+      margin-bottom: 30px;
+
+      animation:
+        aparecer 0.7s ease 0.05s both;
+    }
+
+
+    /* =========================================
+       FRASE
+       ========================================= */
 
     .frase {
-        font-size: 25px;
-        line-height: 1.45;
-        font-weight: normal;
-    }
+      position: relative;
 
-    .adorno {
-        font-family: Georgia, serif;
-        font-size: 24px;
-        margin-top: 24px;
-        opacity: .7;
-    }
+      z-index: 2;
 
+      max-width: 620px;
 
-    /* =========================
-       OPCIÓN 1
-       ROMÁNTICA / CUTE
-       ========================= */
+      margin:
+        0 auto
+        28px;
 
-    .rosa {
-        background: #f8dfe2;
-        border-radius: 30px;
-        border: 1px solid #e7bfc5;
-        box-shadow:
-            0 15px 35px rgba(74,52,40,.12);
-    }
+      color: #4A3428;
 
-    .rosa::before {
-        content: "🎀";
-        position: absolute;
-        top: 18px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 34px;
-    }
+      font-size: 27px;
 
-    .rosa::after {
-        content: "♡";
-        position: absolute;
-        right: 22px;
-        bottom: 18px;
-        font-size: 42px;
-        color: #b8895a;
-        opacity: .35;
+      line-height: 1.52;
+
+      font-weight: normal;
+
+      animation:
+        aparecer 0.7s ease 0.1s both;
     }
 
 
-    /* =========================
-       OPCIÓN 2
-       EDITORIAL
-       ========================= */
+    /* =========================================
+       AUTORA
+       ========================================= */
 
-    .editorial {
-        background: #fdf6f2;
-        border-radius: 8px;
-        border: 1px solid #d8a7a7;
-        box-shadow:
-            0 12px 30px rgba(74,52,40,.10);
-    }
+    .autora {
+      position: relative;
 
-    .editorial::before {
-        content: "🎀";
-        position: absolute;
-        top: 18px;
-        right: 22px;
-        font-size: 28px;
-    }
+      z-index: 2;
 
-    .editorial .frase {
-        font-size: 27px;
-    }
+      color: #884D3A;
 
-    .editorial .adorno {
-        border-top: 1px solid #c6a27e;
-        padding-top: 18px;
-        width: 70px;
-        margin-left: auto;
-        margin-right: auto;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size: 13px;
+
+      font-weight: bold;
+
+      letter-spacing: 1.8px;
+
+      text-transform: uppercase;
+
+      animation:
+        aparecer 0.7s ease 0.15s both;
     }
 
 
-    /* =========================
-       OPCIÓN 3
-       CUTE CAFÉ
-       ========================= */
+    /* =========================================
+       DESCRIPCIÓN
+       ========================================= */
 
-    .cafe {
-        background: #e9d4c5;
-        border-radius: 28px;
-        box-shadow:
-            0 15px 35px rgba(74,52,40,.16);
-    }
+    .descripcion {
+      position: relative;
 
-    .cafe::before {
-        content: "🎀";
-        position: absolute;
-        top: 18px;
-        left: 24px;
-        font-size: 30px;
-    }
+      z-index: 2;
 
-    .cafe::after {
-        content: "♡";
-        position: absolute;
-        top: 23px;
-        right: 27px;
-        font-size: 22px;
-        color: #884d3a;
-    }
+      margin-top: 8px;
 
-    .cafe .frase {
-        color: #4a3428;
+      color: #8A7064;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size: 12px;
+
+      letter-spacing: 0.2px;
+
+      animation:
+        aparecer 0.7s ease 0.2s both;
     }
 
 
-    /* =========================
-       OPCIÓN 4
-       MINIMAL LUXURY
-       ========================= */
+    /* =========================================
+       ADGESTIA
+       ========================================= */
 
-    .luxury {
-        background: #fffaf7;
-        border-radius: 20px;
-        border: 2px solid #c6a27e;
-        box-shadow:
-            0 15px 35px rgba(74,52,40,.10);
-    }
+    .adgestia {
+      position: relative;
 
-    .luxury::before {
-        content: "🎀";
-        position: absolute;
-        top: 17px;
-        left: 50%;
-        transform: translateX(-50%);
-        font-size: 30px;
-    }
+      z-index: 2;
 
-    .luxury .etiqueta {
-        color: #884d3a;
-    }
+      margin-top: 38px;
 
-    .luxury .frase {
-        font-size: 26px;
-    }
+      color: #4A3428;
 
-    .luxury .adorno {
-        color: #b8895a;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size: 13px;
+
+      font-weight: bold;
+
+      letter-spacing: 3.5px;
+
+      animation:
+        aparecer 0.7s ease 0.25s both;
     }
 
 
-    /* =========================
+    /* =========================================
+       TAGLINE
+       ========================================= */
+
+    .tagline {
+      position: relative;
+
+      z-index: 2;
+
+      margin-top: 6px;
+
+      color: #B8895A;
+
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      font-size: 10px;
+
+      letter-spacing: 0.5px;
+
+      animation:
+        aparecer 0.7s ease 0.3s both;
+    }
+
+
+    /* =========================================
+       ANIMACIÓN
+       ========================================= */
+
+    @keyframes aparecer {
+
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+    }
+
+
+    /* =========================================
        RESPONSIVE
-       ========================= */
+       ========================================= */
 
     @media (max-width: 600px) {
 
-        body {
-            padding: 18px 12px;
-        }
+      body {
+        padding: 15px;
+      }
 
-        .galeria {
-            grid-template-columns: 1fr;
-        }
+      .tarjeta {
+        padding:
+          48px
+          27px
+          40px;
 
-        .tarjeta {
-            min-height: 300px;
-            padding: 50px 28px 35px;
-        }
+        border-radius: 25px;
+      }
 
-        .frase,
-        .editorial .frase,
-        .luxury .frase {
-            font-size: 23px;
-        }
+      .moño {
+        font-size: 40px;
+      }
+
+      .titulo {
+        font-size: 23px;
+
+        margin-bottom: 25px;
+      }
+
+      .frase {
+        font-size: 21px;
+
+        line-height: 1.5;
+      }
+
+      .autora {
+        font-size: 11px;
+
+        letter-spacing: 1.4px;
+      }
+
+      .descripcion {
+        font-size: 11px;
+      }
+
+      .adgestia {
+        margin-top: 32px;
+
+        font-size: 12px;
+
+        letter-spacing: 3px;
+      }
+
     }
-</style>
+
+
+  </style>
 </head>
+
 
 <body>
 
-<div class="galeria">
 
-    <!-- =========================
-         MENSAJE 1
-         ========================= -->
+  <!-- =========================================
+       MENSAJE DEL DÍA
+       ========================================= -->
 
-    <div class="tarjeta rosa">
+  <main class="contenedor">
 
-        <div class="etiqueta">
-            Mensaje del día
-        </div>
+    <div
+      id="mensaje"
+      class="tarjeta"
+    ></div>
 
-        <div class="frase">
-            ❝ No necesitas resolverlo todo hoy.<br><br>
-            Solo necesitas identificar lo que realmente importa
-            y dar el siguiente paso. ❞
-        </div>
-
-        <div class="adorno">
-            ♡
-        </div>
-
-    </div>
+  </main>
 
 
-    <!-- =========================
-         MENSAJE 2
-         ========================= -->
+  <script>
 
-    <div class="tarjeta editorial">
+    /*
+    =====================================================
+    MENSAJES DEL 7 AL 31 DE OCTUBRE DE 2026
+    =====================================================
+    */
 
-        <div class="etiqueta">
-            Mensaje del día
-        </div>
+    const mensajes = [
 
-        <div class="frase">
-            ❝ No confundas movimiento con avance.<br><br>
-            Hoy elige una cosa importante,
-            termínala y deja que eso sea suficiente. ❞
-        </div>
+      {
+        fecha: "2026-10-07",
 
-        <div class="adorno">
-            ✦
-        </div>
+        frase:
+          "No necesitas empezar perfecto. Necesitas empezar con claridad y sostener el siguiente paso.",
 
-    </div>
+        autora:
+          "Mensaje original",
 
-
-    <!-- =========================
-         MENSAJE 3
-         ========================= -->
-
-    <div class="tarjeta cafe">
-
-        <div class="etiqueta">
-            Mensaje del día
-        </div>
-
-        <div class="frase">
-            ❝ Hoy no necesitas más presión;
-            necesitas una decisión.<br><br>
-            Elige lo que sí merece tu energía. ❞
-        </div>
-
-        <div class="adorno">
-            ♡
-        </div>
-
-    </div>
+        descripcion:
+          "Enfoque y acción"
+      },
 
 
-    <!-- =========================
-         MENSAJE 4
-         ========================= -->
+      {
+        fecha: "2026-10-08",
 
-    <div class="tarjeta luxury">
+        frase:
+          "Tu tiempo también es un recurso. No lo entregues a todo lo que pide tu atención.",
 
-        <div class="etiqueta">
-            Mensaje del día
-        </div>
+        autora:
+          "Mensaje original",
 
-        <div class="frase">
-            ❝ No todo merece una respuesta inmediata.<br><br>
-            Hoy protege tu atención:
-            decide qué sí importa y hazlo con intención. ❞
-        </div>
-
-        <div class="adorno">
-            ✧
-        </div>
-
-    </div>
+        descripcion:
+          "Prioridades y enfoque"
+      },
 
 
-    <!-- =========================
-         MENSAJE 5
-         ========================= -->
+      {
+        fecha: "2026-10-09",
 
-    <div class="tarjeta rosa">
+        frase:
+          "No todo pendiente merece tu mejor energía. Hoy decide qué realmente mueve la aguja.",
 
-        <div class="etiqueta">
-            Mensaje del día
-        </div>
+        autora:
+          "Mensaje original",
 
-        <div class="frase">
-            ❝ Hoy no midas tu día por todo lo que falta.<br><br>
-            Elige una prioridad que realmente mueva algo
-            y termínala. ❞
-        </div>
+        descripcion:
+          "Productividad consciente"
+      },
 
-        <div class="adorno">
+
+      {
+        fecha: "2026-10-10",
+
+        frase:
+          "La disciplina no siempre se siente como motivación. A veces simplemente se parece a cumplir contigo.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Disciplina personal"
+      },
+
+
+      {
+        fecha: "2026-10-11",
+
+        frase:
+          "No necesitas tener todas las respuestas para tomar una buena decisión. Necesitas suficiente claridad para avanzar.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Decisiones"
+      },
+
+
+      {
+        fecha: "2026-10-12",
+
+        frase:
+          "Tu crecimiento también está en aprender qué ya no necesita tu tiempo.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Crecimiento y límites"
+      },
+
+
+      {
+        fecha: "2026-10-13",
+
+        frase:
+          "Haz primero aquello que, al terminarlo, hará que el resto de tu día pese menos.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Enfoque"
+      },
+
+
+      {
+        fecha: "2026-10-14",
+
+        frase:
+          "No confundas estar ocupada con estar avanzando. El resultado importa más que el ruido.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Productividad"
+      },
+
+
+      {
+        fecha: "2026-10-15",
+
+        frase:
+          "Hay decisiones que no necesitan más análisis. Necesitan que confíes en lo que ya sabes.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Confianza"
+      },
+
+
+      {
+        fecha: "2026-10-16",
+
+        frase:
+          "Protege tu atención como proteges tus recursos: no la inviertas donde no existe retorno.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Energía y enfoque"
+      },
+
+
+      {
+        fecha: "2026-10-17",
+
+        frase:
+          "No tienes que demostrar cuánto puedes cargar. También es inteligencia saber qué dejar fuera.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Límites"
+      },
+
+
+      {
+        fecha: "2026-10-18",
+
+        frase:
+          "Lo que haces de manera constante termina teniendo más peso que lo que haces de manera extraordinaria una sola vez.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Constancia"
+      },
+
+
+      {
+        fecha: "2026-10-19",
+
+        frase:
+          "Hoy elige una prioridad, dale tu mejor atención y deja que lo demás espere su turno.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Prioridades"
+      },
+
+
+      {
+        fecha: "2026-10-20",
+
+        frase:
+          "No necesitas correr para demostrar que avanzas. Necesitas saber hacia dónde estás caminando.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Dirección"
+      },
+
+
+      {
+        fecha: "2026-10-21",
+
+        frase:
+          "Cada vez que eliges con intención, estás construyendo la versión de tu vida que quieres sostener.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Intención"
+      },
+
+
+      {
+        fecha: "2026-10-22",
+
+        frase:
+          "Tu capacidad no se mide por cuántas cosas aceptas, sino por la calidad de lo que decides hacer.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Liderazgo personal"
+      },
+
+
+      {
+        fecha: "2026-10-23",
+
+        frase:
+          "No esperes sentirte completamente lista. Algunas etapas solo se entienden después de haberlas atravesado.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Valentía"
+      },
+
+
+      {
+        fecha: "2026-10-24",
+
+        frase:
+          "Hoy no necesitas más presión. Necesitas una decisión clara y el valor de sostenerla.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Determinación"
+      },
+
+
+      {
+        fecha: "2026-10-25",
+
+        frase:
+          "Lo que hoy parece pequeño puede convertirse en la estructura que sostenga algo mucho más grande.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Progreso"
+      },
+
+
+      {
+        fecha: "2026-10-26",
+
+        frase:
+          "No permitas que la urgencia de otros decida qué es importante para ti.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Límites y prioridades"
+      },
+
+
+      {
+        fecha: "2026-10-27",
+
+        frase:
+          "Hay días para avanzar rápido y días para ordenar el camino. Ambos también cuentan.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Proceso"
+      },
+
+
+      {
+        fecha: "2026-10-28",
+
+        frase:
+          "Tu siguiente nivel no siempre necesita más esfuerzo. A veces necesita mejores decisiones.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Estrategia"
+      },
+
+
+      {
+        fecha: "2026-10-29",
+
+        frase:
+          "No minimices todo lo que has construido solo porque todavía estás construyendo.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Reconocimiento"
+      },
+
+
+      {
+        fecha: "2026-10-30",
+
+        frase:
+          "Cierra octubre reconociendo lo que sí avanzó, lo que aprendiste y lo que ya no quieres repetir.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Reflexión"
+      },
+
+
+      {
+        fecha: "2026-10-31",
+
+        frase:
+          "No necesitas terminar el mes con todo resuelto. Termínalo sabiendo qué merece continuar contigo.",
+
+        autora:
+          "Mensaje original",
+
+        descripcion:
+          "Cierre y claridad"
+      }
+
+    ];
+
+
+    /*
+    =====================================================
+    OBTENER FECHA ACTUAL DE CIUDAD DE MÉXICO
+    =====================================================
+    */
+
+    function obtenerFechaMexico() {
+
+      return new Intl.DateTimeFormat(
+        "en-CA",
+        {
+          timeZone: "America/Mexico_City",
+
+          year: "numeric",
+
+          month: "2-digit",
+
+          day: "2-digit"
+        }
+      ).format(new Date());
+
+    }
+
+
+    /*
+    =====================================================
+    MOSTRAR MENSAJE CORRESPONDIENTE AL DÍA
+    =====================================================
+    */
+
+    function mostrarMensajeDelDia() {
+
+      const fechaHoy =
+        obtenerFechaMexico();
+
+
+      const mensaje =
+        mensajes.find(
+          item =>
+            item.fecha === fechaHoy
+        );
+
+
+      const tarjeta =
+        document.getElementById("mensaje");
+
+
+      /*
+      ---------------------------------------------
+      FUERA DEL PERIODO
+      ---------------------------------------------
+      */
+
+      if (!mensaje) {
+
+        tarjeta.innerHTML = `
+
+          <div class="moño">
             🎀
+          </div>
+
+          <div class="titulo">
+            Buenos días
+          </div>
+
+          <div class="frase">
+            Pronto habrá un nuevo mensaje para ti.
+          </div>
+
+          <div class="adgestia">
+            ADGESTIA
+          </div>
+
+          <div class="tagline">
+            Administración y Gestión con IA
+          </div>
+
+        `;
+
+        return;
+      }
+
+
+      /*
+      ---------------------------------------------
+      MENSAJE DEL DÍA
+      ---------------------------------------------
+      */
+
+      tarjeta.innerHTML = `
+
+        <div class="moño">
+          🎀
         </div>
 
-    </div>
-
-
-    <!-- =========================
-         MENSAJE 6
-         ========================= -->
-
-    <div class="tarjeta editorial">
-
-        <div class="etiqueta">
-            Mensaje del día
+        <div class="titulo">
+          Buenos días
         </div>
 
         <div class="frase">
-            ❝ No le des tu mejor energía a lo urgente
-            por costumbre.<br><br>
-            Resuelve primero lo que de verdad mejora tu día. ❞
+          “${mensaje.frase}”
         </div>
 
-        <div class="adorno">
-            ♡
+        <div class="autora">
+          ${mensaje.autora}
         </div>
 
-    </div>
+        <div class="descripcion">
+          ${mensaje.descripcion}
+        </div>
 
-</div>
+        <div class="adgestia">
+          ADGESTIA
+        </div>
+
+        <div class="tagline">
+          Administración y Gestión con IA
+        </div>
+
+      `;
+
+    }
+
+
+    /*
+    =====================================================
+    CARGAR AL ABRIR
+    =====================================================
+    */
+
+    mostrarMensajeDelDia();
+
+
+    /*
+    =====================================================
+    COMPROBAR CAMBIO DE DÍA
+    =====================================================
+
+    Se revisa cada minuto.
+
+    Esto significa que:
+
+    07/10 00:00 → mensaje del 7
+    07/10 23:59 → mensaje del 7
+    08/10 00:00 → mensaje del 8
+
+    El usuario no tiene que actualizar manualmente
+    el contenido.
+    */
+
+    setInterval(
+      mostrarMensajeDelDia,
+      60000
+    );
+
+
+  </script>
+
 
 </body>
 </html>
