@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Mensaje del Día</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Georgia, "Times New Roman", serif;
+        background: #fdf6f2;
+        color: #4a3428;
+        padding: 30px 18px;
+    }
+
+    .galeria {
+        max-width: 1000px;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 28px;
+    }
+
+    /* =========================
+       TARJETA BASE
+       ========================= */
+
+    .tarjeta {
+        position: relative;
+        min-height: 330px;
+        padding: 55px 38px 42px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    .etiqueta {
+        font-family: Arial, sans-serif;
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+        opacity: .75;
+    }
+
+    .frase {
+        font-size: 25px;
+        line-height: 1.45;
+        font-weight: normal;
+    }
+
+    .adorno {
+        font-family: Georgia, serif;
+        font-size: 24px;
+        margin-top: 24px;
+        opacity: .7;
+    }
+
+
+    /* =========================
+       OPCIÓN 1
+       ROMÁNTICA / CUTE
+       ========================= */
+
+    .rosa {
+        background: #f8dfe2;
+        border-radius: 30px;
+        border: 1px solid #e7bfc5;
+        box-shadow:
+            0 15px 35px rgba(74,52,40,.12);
+    }
+
+    .rosa::before {
+        content: "🎀";
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 34px;
+    }
+
+    .rosa::after {
+        content: "♡";
+        position: absolute;
+        right: 22px;
+        bottom: 18px;
+        font-size: 42px;
+        color: #b8895a;
+        opacity: .35;
+    }
+
+
+    /* =========================
+       OPCIÓN 2
+       EDITORIAL
+       ========================= */
+
+    .editorial {
+        background: #fdf6f2;
+        border-radius: 8px;
+        border: 1px solid #d8a7a7;
+        box-shadow:
+            0 12px 30px rgba(74,52,40,.10);
+    }
+
+    .editorial::before {
+        content: "🎀";
+        position: absolute;
+        top: 18px;
+        right: 22px;
+        font-size: 28px;
+    }
+
+    .editorial .frase {
+        font-size: 27px;
+    }
+
+    .editorial .adorno {
+        border-top: 1px solid #c6a27e;
+        padding-top: 18px;
+        width: 70px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    /* =========================
+       OPCIÓN 3
+       CUTE CAFÉ
+       ========================= */
+
+    .cafe {
+        background: #e9d4c5;
+        border-radius: 28px;
+        box-shadow:
+            0 15px 35px rgba(74,52,40,.16);
+    }
+
+    .cafe::before {
+        content: "🎀";
+        position: absolute;
+        top: 18px;
+        left: 24px;
+        font-size: 30px;
+    }
+
+    .cafe::after {
+        content: "♡";
+        position: absolute;
+        top: 23px;
+        right: 27px;
+        font-size: 22px;
+        color: #884d3a;
+    }
+
+    .cafe .frase {
+        color: #4a3428;
+    }
+
+
+    /* =========================
+       OPCIÓN 4
+       MINIMAL LUXURY
+       ========================= */
+
+    .luxury {
+        background: #fffaf7;
+        border-radius: 20px;
+        border: 2px solid #c6a27e;
+        box-shadow:
+            0 15px 35px rgba(74,52,40,.10);
+    }
+
+    .luxury::before {
+        content: "🎀";
+        position: absolute;
+        top: 17px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 30px;
+    }
+
+    .luxury .etiqueta {
+        color: #884d3a;
+    }
+
+    .luxury .frase {
+        font-size: 26px;
+    }
+
+    .luxury .adorno {
+        color: #b8895a;
+    }
+
+
+    /* =========================
+       RESPONSIVE
+       ========================= */
+
+    @media (max-width: 600px) {
+
+        body {
+            padding: 18px 12px;
+        }
+
+        .galeria {
+            grid-template-columns: 1fr;
+        }
+
+        .tarjeta {
+            min-height: 300px;
+            padding: 50px 28px 35px;
+        }
+
+        .frase,
+        .editorial .frase,
+        .luxury .frase {
+            font-size: 23px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="galeria">
+
+    <!-- =========================
+         MENSAJE 1
+         ========================= -->
+
+    <div class="tarjeta rosa">
+
+        <div class="etiqueta">
+            Mensaje del día
+        </div>
+
+        <div class="frase">
+            ❝ No necesitas resolverlo todo hoy.<br><br>
+            Solo necesitas identificar lo que realmente importa
+            y dar el siguiente paso. ❞
+        </div>
+
+        <div class="adorno">
+            ♡
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MENSAJE 2
+         ========================= -->
+
+    <div class="tarjeta editorial">
+
+        <div class="etiqueta">
+            Mensaje del día
+        </div>
+
+        <div class="frase">
+            ❝ No confundas movimiento con avance.<br><br>
+            Hoy elige una cosa importante,
+            termínala y deja que eso sea suficiente. ❞
+        </div>
+
+        <div class="adorno">
+            ✦
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MENSAJE 3
+         ========================= -->
+
+    <div class="tarjeta cafe">
+
+        <div class="etiqueta">
+            Mensaje del día
+        </div>
+
+        <div class="frase">
+            ❝ Hoy no necesitas más presión;
+            necesitas una decisión.<br><br>
+            Elige lo que sí merece tu energía. ❞
+        </div>
+
+        <div class="adorno">
+            ♡
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MENSAJE 4
+         ========================= -->
+
+    <div class="tarjeta luxury">
+
+        <div class="etiqueta">
+            Mensaje del día
+        </div>
+
+        <div class="frase">
+            ❝ No todo merece una respuesta inmediata.<br><br>
+            Hoy protege tu atención:
+            decide qué sí importa y hazlo con intención. ❞
+        </div>
+
+        <div class="adorno">
+            ✧
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MENSAJE 5
+         ========================= -->
+
+    <div class="tarjeta rosa">
+
+        <div class="etiqueta">
+            Mensaje del día
+        </div>
+
+        <div class="frase">
+            ❝ Hoy no midas tu día por todo lo que falta.<br><br>
+            Elige una prioridad que realmente mueva algo
+            y termínala. ❞
+        </div>
+
+        <div class="adorno">
+            🎀
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MENSAJE 6
+         ========================= -->
+
+    <div class="tarjeta editorial">
+
+        <div class="etiqueta">
+            Mensaje del día
+        </div>
+
+        <div class="frase">
+            ❝ No le des tu mejor energía a lo urgente
+            por costumbre.<br><br>
+            Resuelve primero lo que de verdad mejora tu día. ❞
+        </div>
+
+        <div class="adorno">
+            ♡
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
