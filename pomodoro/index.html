@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Enfoque</title>
+<style>
+:root{
+  --cream:#fdf6f2;
+  --brown:#4a3428;
+  --accent:#b8895a;
+  --soft:#ead8ce;
+  --muted:#8a7468;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;width:100%;height:100%;background:transparent}
+body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--brown);overflow:hidden}
+.wrap{width:100%;height:100%;padding:8px 0;background:transparent;border:0;box-shadow:none}
+.card{width:100%;max-width:360px;margin:0 auto;padding:12px 14px 13px;background:var(--cream);border:0;box-shadow:none;border-radius:14px}
+h1{font-size:17px;line-height:1.1;margin:0 0 2px;font-weight:700}
+.mode{font-size:10px;color:var(--muted);margin-bottom:9px}
+input{width:100%;height:32px;border:1px solid #dccbc0;border-radius:9px;background:#fffaf7;color:var(--brown);padding:0 10px;font-size:12px;outline:none}
+input:focus{border-color:var(--accent)}
+.presets{display:flex;gap:6px;margin:8px 0}
+button{font:inherit;cursor:pointer}
+.preset{flex:1;height:29px;border:1px solid #dccbc0;border-radius:8px;background:#fffaf7;color:var(--brown);font-size:11px}
+.preset.active{background:var(--brown);color:white;border-color:var(--brown)}
+.clock{text-align:center;font-variant-numeric:tabular-nums;font-size:38px;line-height:1;font-weight:700;letter-spacing:1px;margin:7px 0 9px}
+.controls{display:flex;gap:6px}
+.control{flex:1;height:30px;border:0;border-radius:8px;background:var(--brown);color:white;font-size:11px}
+.control.secondary{background:#eadfd8;color:var(--brown)}
+.status{text-align:center;font-size:10px;color:var(--muted);min-height:13px;margin-top:7px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>🍅 Enfoque</h1>
+    <div class="mode">Modo de trabajo</div>
+    <input id="task" placeholder="¿En qué tarea te vas a concentrar?" aria-label="Tarea">
+    <div class="presets">
+      <button class="preset active" data-min="25">25 min</button>
+      <button class="preset" data-min="15">15 min</button>
+      <button class="preset" data-min="5">5 min</button>
+    </div>
+    <div class="clock" id="clock">25:00</div>
+    <div class="controls">
+      <button class="control" id="start">Iniciar</button>
+      <button class="control secondary" id="pause">Pausar</button>
+      <button class="control secondary" id="reset">Reiniciar</button>
+    </div>
+    <div class="status" id="status">Listo para comenzar</div>
+  </div>
+</div>
+<script>
+let total=25*60, remaining=total, timer=null, running=false;
+const clock=document.getElementById('clock'), status=document.getElementById('status');
+const task=document.getElementById('task');
+const presets=[...document.querySelectorAll('.preset')];
+function render(){
+  const m=String(Math.floor(remaining/60)).padStart(2,'0');
+  const s=String(remaining%60).padStart(2,'0');
+  clock.textContent=m+':'+s;
+}
+function setMode(min,button){
+  clearInterval(timer); running=false; total=min*60; remaining=total;
+  presets.forEach(b=>b.classList.remove('active')); button.classList.add('active');
+  status.textContent='Listo para comenzar'; render();
+}
+presets.forEach(b=>b.addEventListener('click',()=>setMode(Number(b.dataset.min),b)));
+document.getElementById('start').addEventListener('click',()=>{
+  if(running)return;
+  if(remaining<=0)remaining=total;
+  running=true; status.textContent=task.value.trim()?task.value.trim():'Enfoque en curso';
+  timer=setInterval(()=>{
+    remaining--; render();
+    if(remaining<=0){
+      clearInterval(timer); running=false;
+      status.textContent='Tiempo terminado';
+      try{document.title='⏰ Tiempo terminado';}catch(e){}
+    }
+  },1000);
+});
+document.getElementById('pause').addEventListener('click',()=>{
+  if(!running)return;
+  clearInterval(timer); running=false; status.textContent='Pausado';
+});
+document.getElementById('reset').addEventListener('click',()=>{
+  clearInterval(timer); running=false; remaining=total; status.textContent='Listo para comenzar'; render();
+});
+render();
+</script>
+</body>
+</html>
