@@ -214,7 +214,7 @@ function fechaMexico(){return new Intl.DateTimeFormat("en-CA",{timeZone:"America
 function mostrar(){
  const hoy=fechaMexico(), m=mensajes.find(x=>x.fecha===hoy), el=document.getElementById("mensaje");
  if(!m){el.innerHTML='<div class="moño">🎀</div><div class="titulo">Buenos días</div><div class="frase">Cada día es una nueva oportunidad para pensar con claridad y avanzar con intención.</div><div class="adgestia">ADGESTIA</div><div class="tagline">Administración y Gestión con IA</div>';return}
- el.innerHTML='<div class="moño">🎀</div><div class="titulo">Buenos días</div><div class="frase">“'+m.frase+'”</div><div class="autora">Inspirada en '+m.autora+'</div><div class="descripcion">'+m.descripcion+'</div><div class="nota">Reflexión editorial de ADGESTIA; no es una cita textual.</div><div class="adgestia">ADGESTIA</div><div class="tagline">Administración y Gestión con IA</div>';
+ el.innerHTML='<div class="moño">🎀</div><div class="titulo">Buenos días</div><div class="frase">“'+m.frase+'”</div><div class="adgestia">ADGESTIA</div><div class="tagline">Administración y Gestión con IA</div>';
 }
 mostrar();setInterval(mostrar,60000);
 </script>
