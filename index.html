@@ -1,943 +1,222 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Mensaje del día · Adgestia</title>
-
-  <style>
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      min-height: 100%;
-    }
-
-    body {
-      min-height: 100vh;
-
-      background:
-        radial-gradient(
-          circle at 10% 10%,
-          rgba(248, 221, 226, 0.65),
-          transparent 28%
-        ),
-        radial-gradient(
-          circle at 90% 90%,
-          rgba(239, 213, 199, 0.55),
-          transparent 30%
-        ),
-        #FDF6F2;
-
-      font-family:
-        Georgia,
-        "Times New Roman",
-        serif;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 24px;
-    }
-
-
-    /* =========================================
-       CONTENEDOR PRINCIPAL
-       ========================================= */
-
-    .contenedor {
-      width: 100%;
-      max-width: 760px;
-    }
-
-
-    /* =========================================
-       TARJETA
-       ========================================= */
-
-    .tarjeta {
-      position: relative;
-
-      width: 100%;
-
-      background: #FFF9F6;
-
-      border: 1px solid #D8A7A7;
-
-      border-radius: 30px;
-
-      padding:
-        58px
-        55px
-        48px;
-
-      text-align: center;
-
-      overflow: hidden;
-
-      box-shadow:
-        0 20px 55px rgba(74, 52, 40, 0.12);
-
-      transition:
-        opacity 0.4s ease,
-        transform 0.4s ease;
-    }
-
-
-    /* =========================================
-       DECORACIONES
-       ========================================= */
-
-    .tarjeta::before {
-      content: "";
-
-      position: absolute;
-
-      width: 220px;
-      height: 220px;
-
-      background: #F8DDE2;
-
-      border-radius: 50%;
-
-      top: -120px;
-      left: -90px;
-
-      opacity: 0.7;
-    }
-
-
-    .tarjeta::after {
-      content: "";
-
-      position: absolute;
-
-      width: 190px;
-      height: 190px;
-
-      background: #EFD5C7;
-
-      border-radius: 50%;
-
-      bottom: -110px;
-      right: -80px;
-
-      opacity: 0.55;
-    }
-
-
-    /* =========================================
-       MOÑO
-       ========================================= */
-
-    .moño {
-      position: relative;
-
-      z-index: 2;
-
-      font-size: 46px;
-
-      line-height: 1;
-
-      margin-bottom: 16px;
-
-      animation:
-        aparecer 0.7s ease;
-    }
-
-
-    /* =========================================
-       BUENOS DÍAS
-       ========================================= */
-
-    .titulo {
-      position: relative;
-
-      z-index: 2;
-
-      color: #884D3A;
-
-      font-size: 27px;
-
-      font-weight: bold;
-
-      letter-spacing: 1px;
-
-      margin-bottom: 30px;
-
-      animation:
-        aparecer 0.7s ease 0.05s both;
-    }
-
-
-    /* =========================================
-       FRASE
-       ========================================= */
-
-    .frase {
-      position: relative;
-
-      z-index: 2;
-
-      max-width: 620px;
-
-      margin:
-        0 auto
-        28px;
-
-      color: #4A3428;
-
-      font-size: 27px;
-
-      line-height: 1.52;
-
-      font-weight: normal;
-
-      animation:
-        aparecer 0.7s ease 0.1s both;
-    }
-
-
-    /* =========================================
-       AUTORA
-       ========================================= */
-
-    .autora {
-      position: relative;
-
-      z-index: 2;
-
-      color: #884D3A;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      font-size: 13px;
-
-      font-weight: bold;
-
-      letter-spacing: 1.8px;
-
-      text-transform: uppercase;
-
-      animation:
-        aparecer 0.7s ease 0.15s both;
-    }
-
-
-    /* =========================================
-       DESCRIPCIÓN
-       ========================================= */
-
-    .descripcion {
-      position: relative;
-
-      z-index: 2;
-
-      margin-top: 8px;
-
-      color: #8A7064;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      font-size: 12px;
-
-      letter-spacing: 0.2px;
-
-      animation:
-        aparecer 0.7s ease 0.2s both;
-    }
-
-
-    /* =========================================
-       ADGESTIA
-       ========================================= */
-
-    .adgestia {
-      position: relative;
-
-      z-index: 2;
-
-      margin-top: 38px;
-
-      color: #4A3428;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      font-size: 13px;
-
-      font-weight: bold;
-
-      letter-spacing: 3.5px;
-
-      animation:
-        aparecer 0.7s ease 0.25s both;
-    }
-
-
-    /* =========================================
-       TAGLINE
-       ========================================= */
-
-    .tagline {
-      position: relative;
-
-      z-index: 2;
-
-      margin-top: 6px;
-
-      color: #B8895A;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      font-size: 10px;
-
-      letter-spacing: 0.5px;
-
-      animation:
-        aparecer 0.7s ease 0.3s both;
-    }
-
-
-    /* =========================================
-       ANIMACIÓN
-       ========================================= */
-
-    @keyframes aparecer {
-
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-    }
-
-
-    /* =========================================
-       RESPONSIVE
-       ========================================= */
-
-    @media (max-width: 600px) {
-
-      body {
-        padding: 15px;
-      }
-
-      .tarjeta {
-        padding:
-          48px
-          27px
-          40px;
-
-        border-radius: 25px;
-      }
-
-      .moño {
-        font-size: 40px;
-      }
-
-      .titulo {
-        font-size: 23px;
-
-        margin-bottom: 25px;
-      }
-
-      .frase {
-        font-size: 21px;
-
-        line-height: 1.5;
-      }
-
-      .autora {
-        font-size: 11px;
-
-        letter-spacing: 1.4px;
-      }
-
-      .descripcion {
-        font-size: 11px;
-      }
-
-      .adgestia {
-        margin-top: 32px;
-
-        font-size: 12px;
-
-        letter-spacing: 3px;
-      }
-
-    }
-
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Buenos días · Adgestia</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;width:100%}
+body{min-height:100vh;padding:20px;background:radial-gradient(circle at 10% 10%,rgba(248,221,226,.65),transparent 28%),radial-gradient(circle at 90% 90%,rgba(239,213,199,.55),transparent 30%),#FDF6F2;font-family:Georgia,"Times New Roman",serif;display:flex;align-items:center;justify-content:center;color:#4A3428}
+.contenedor{width:100%;max-width:760px}
+.tarjeta{position:relative;width:100%;background:#FFF9F6;border:1px solid #D8A7A7;border-radius:30px;padding:clamp(32px,6vw,58px) clamp(22px,7vw,55px) 44px;text-align:center;overflow:hidden;box-shadow:0 20px 55px rgba(74,52,40,.12)}
+.tarjeta:before,.tarjeta:after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+.tarjeta:before{width:220px;height:220px;background:#F8DDE2;top:-120px;left:-90px;opacity:.7}
+.tarjeta:after{width:190px;height:190px;background:#EFD5C7;bottom:-110px;right:-80px;opacity:.55}
+.moño,.titulo,.frase,.autora,.descripcion,.adgestia,.tagline,.nota{position:relative;z-index:1}
+.moño{font-size:42px;line-height:1;margin-bottom:15px}
+.titulo{color:#884D3A;font:700 25px Arial,sans-serif;letter-spacing:1px;margin-bottom:24px}
+.frase{max-width:620px;margin:0 auto 25px;color:#4A3428;font-size:clamp(21px,3.4vw,28px);line-height:1.48}
+.autora{color:#884D3A;font:700 12px Arial,sans-serif;letter-spacing:1.5px;text-transform:uppercase}
+.descripcion{margin:8px auto 0;max-width:540px;color:#8A7064;font:12px/1.5 Arial,sans-serif}
+.nota{margin-top:12px;color:#9A8175;font:10px Arial,sans-serif}
+.adgestia{margin-top:30px;color:#4A3428;font:700 13px Arial,sans-serif;letter-spacing:3.5px}
+.tagline{margin-top:6px;color:#B8895A;font:10px Arial,sans-serif;letter-spacing:.5px}
+@media(max-width:600px){body{padding:12px}.tarjeta{border-radius:24px}.titulo{font-size:22px}.autora{font-size:11px}}
+</style>
 </head>
-
-
 <body>
-
-
-  <!-- =========================================
-       MENSAJE DEL DÍA
-       ========================================= -->
-
-  <main class="contenedor">
-
-    <div
-      id="mensaje"
-      class="tarjeta"
-    ></div>
-
-  </main>
-
-
-  <script>
-
-    /*
-    =====================================================
-    MENSAJES DEL 7 AL 31 DE OCTUBRE DE 2026
-    =====================================================
-    */
-
-    const mensajes = [
-
-      {
-        fecha: "2026-10-07",
-
-        frase:
-          "No necesitas empezar perfecto. Necesitas empezar con claridad y sostener el siguiente paso.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Enfoque y acción"
-      },
-
-
-      {
-        fecha: "2026-10-08",
-
-        frase:
-          "Tu tiempo también es un recurso. No lo entregues a todo lo que pide tu atención.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Prioridades y enfoque"
-      },
-
-
-      {
-        fecha: "2026-10-09",
-
-        frase:
-          "No todo pendiente merece tu mejor energía. Hoy decide qué realmente mueve la aguja.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Productividad consciente"
-      },
-
-
-      {
-        fecha: "2026-10-10",
-
-        frase:
-          "La disciplina no siempre se siente como motivación. A veces simplemente se parece a cumplir contigo.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Disciplina personal"
-      },
-
-
-      {
-        fecha: "2026-10-11",
-
-        frase:
-          "No necesitas tener todas las respuestas para tomar una buena decisión. Necesitas suficiente claridad para avanzar.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Decisiones"
-      },
-
-
-      {
-        fecha: "2026-10-12",
-
-        frase:
-          "Tu crecimiento también está en aprender qué ya no necesita tu tiempo.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Crecimiento y límites"
-      },
-
-
-      {
-        fecha: "2026-10-13",
-
-        frase:
-          "Haz primero aquello que, al terminarlo, hará que el resto de tu día pese menos.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Enfoque"
-      },
-
-
-      {
-        fecha: "2026-10-14",
-
-        frase:
-          "No confundas estar ocupada con estar avanzando. El resultado importa más que el ruido.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Productividad"
-      },
-
-
-      {
-        fecha: "2026-10-15",
-
-        frase:
-          "Hay decisiones que no necesitan más análisis. Necesitan que confíes en lo que ya sabes.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Confianza"
-      },
-
-
-      {
-        fecha: "2026-10-16",
-
-        frase:
-          "Protege tu atención como proteges tus recursos: no la inviertas donde no existe retorno.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Energía y enfoque"
-      },
-
-
-      {
-        fecha: "2026-10-17",
-
-        frase:
-          "No tienes que demostrar cuánto puedes cargar. También es inteligencia saber qué dejar fuera.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Límites"
-      },
-
-
-      {
-        fecha: "2026-10-18",
-
-        frase:
-          "Lo que haces de manera constante termina teniendo más peso que lo que haces de manera extraordinaria una sola vez.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Constancia"
-      },
-
-
-      {
-        fecha: "2026-10-19",
-
-        frase:
-          "Hoy elige una prioridad, dale tu mejor atención y deja que lo demás espere su turno.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Prioridades"
-      },
-
-
-      {
-        fecha: "2026-10-20",
-
-        frase:
-          "No necesitas correr para demostrar que avanzas. Necesitas saber hacia dónde estás caminando.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Dirección"
-      },
-
-
-      {
-        fecha: "2026-10-21",
-
-        frase:
-          "Cada vez que eliges con intención, estás construyendo la versión de tu vida que quieres sostener.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Intención"
-      },
-
-
-      {
-        fecha: "2026-10-22",
-
-        frase:
-          "Tu capacidad no se mide por cuántas cosas aceptas, sino por la calidad de lo que decides hacer.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Liderazgo personal"
-      },
-
-
-      {
-        fecha: "2026-10-23",
-
-        frase:
-          "No esperes sentirte completamente lista. Algunas etapas solo se entienden después de haberlas atravesado.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Valentía"
-      },
-
-
-      {
-        fecha: "2026-10-24",
-
-        frase:
-          "Hoy no necesitas más presión. Necesitas una decisión clara y el valor de sostenerla.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Determinación"
-      },
-
-
-      {
-        fecha: "2026-10-25",
-
-        frase:
-          "Lo que hoy parece pequeño puede convertirse en la estructura que sostenga algo mucho más grande.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Progreso"
-      },
-
-
-      {
-        fecha: "2026-10-26",
-
-        frase:
-          "No permitas que la urgencia de otros decida qué es importante para ti.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Límites y prioridades"
-      },
-
-
-      {
-        fecha: "2026-10-27",
-
-        frase:
-          "Hay días para avanzar rápido y días para ordenar el camino. Ambos también cuentan.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Proceso"
-      },
-
-
-      {
-        fecha: "2026-10-28",
-
-        frase:
-          "Tu siguiente nivel no siempre necesita más esfuerzo. A veces necesita mejores decisiones.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Estrategia"
-      },
-
-
-      {
-        fecha: "2026-10-29",
-
-        frase:
-          "No minimices todo lo que has construido solo porque todavía estás construyendo.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Reconocimiento"
-      },
-
-
-      {
-        fecha: "2026-10-30",
-
-        frase:
-          "Cierra octubre reconociendo lo que sí avanzó, lo que aprendiste y lo que ya no quieres repetir.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Reflexión"
-      },
-
-
-      {
-        fecha: "2026-10-31",
-
-        frase:
-          "No necesitas terminar el mes con todo resuelto. Termínalo sabiendo qué merece continuar contigo.",
-
-        autora:
-          "Mensaje original",
-
-        descripcion:
-          "Cierre y claridad"
-      }
-
-    ];
-
-
-    /*
-    =====================================================
-    OBTENER FECHA ACTUAL DE CIUDAD DE MÉXICO
-    =====================================================
-    */
-
-    function obtenerFechaMexico() {
-
-      return new Intl.DateTimeFormat(
-        "en-CA",
-        {
-          timeZone: "America/Mexico_City",
-
-          year: "numeric",
-
-          month: "2-digit",
-
-          day: "2-digit"
-        }
-      ).format(new Date());
-
-    }
-
-
-    /*
-    =====================================================
-    MOSTRAR MENSAJE CORRESPONDIENTE AL DÍA
-    =====================================================
-    */
-
-    function mostrarMensajeDelDia() {
-
-      const fechaHoy =
-        obtenerFechaMexico();
-
-
-      const mensaje =
-        mensajes.find(
-          item =>
-            item.fecha === fechaHoy
-        );
-
-
-      const tarjeta =
-        document.getElementById("mensaje");
-
-
-      /*
-      ---------------------------------------------
-      FUERA DEL PERIODO
-      ---------------------------------------------
-      */
-
-      if (!mensaje) {
-
-        tarjeta.innerHTML = `
-
-          <div class="moño">
-            🎀
-          </div>
-
-          <div class="titulo">
-            Buenos días
-          </div>
-
-          <div class="frase">
-            Pronto habrá un nuevo mensaje para ti.
-          </div>
-
-          <div class="adgestia">
-            ADGESTIA
-          </div>
-
-          <div class="tagline">
-            Administración y Gestión con IA
-          </div>
-
-        `;
-
-        return;
-      }
-
-
-      /*
-      ---------------------------------------------
-      MENSAJE DEL DÍA
-      ---------------------------------------------
-      */
-
-      tarjeta.innerHTML = `
-
-        <div class="moño">
-          🎀
-        </div>
-
-        <div class="titulo">
-          Buenos días
-        </div>
-
-        <div class="frase">
-          “${mensaje.frase}”
-        </div>
-
-        <div class="autora">
-          ${mensaje.autora}
-        </div>
-
-        <div class="descripcion">
-          ${mensaje.descripcion}
-        </div>
-
-        <div class="adgestia">
-          ADGESTIA
-        </div>
-
-        <div class="tagline">
-          Administración y Gestión con IA
-        </div>
-
-      `;
-
-    }
-
-
-    /*
-    =====================================================
-    CARGAR AL ABRIR
-    =====================================================
-    */
-
-    mostrarMensajeDelDia();
-
-
-    /*
-    =====================================================
-    COMPROBAR CAMBIO DE DÍA
-    =====================================================
-
-    Se revisa cada minuto.
-
-    Esto significa que:
-
-    07/10 00:00 → mensaje del 7
-    07/10 23:59 → mensaje del 7
-    08/10 00:00 → mensaje del 8
-
-    El usuario no tiene que actualizar manualmente
-    el contenido.
-    */
-
-    setInterval(
-      mostrarMensajeDelDia,
-      60000
-    );
-
-
-  </script>
-
-
+<main class="contenedor"><section id="mensaje" class="tarjeta" aria-live="polite"></section></main>
+<script>
+const mensajes = [
+  {
+    "fecha": "2026-11-01",
+    "autora": "Katherine Johnson",
+    "frase": "La precisión de tu trabajo puede abrir caminos que antes parecían imposibles.",
+    "descripcion": "Matemática afroestadounidense de la NASA; contribuyó a los primeros vuelos espaciales tripulados."
+  },
+  {
+    "fecha": "2026-11-02",
+    "autora": "Marie Curie",
+    "frase": "La curiosidad sostenida transforma preguntas difíciles en descubrimientos que cambian el mundo.",
+    "descripcion": "Física y química polaca-francesa; pionera en el estudio de la radiactividad."
+  },
+  {
+    "fecha": "2026-11-03",
+    "autora": "Wangari Maathai",
+    "frase": "Un cambio profundo comienza con una acción concreta, incluso cuando parece pequeña.",
+    "descripcion": "Bióloga y activista keniana; fundó el Movimiento Cinturón Verde."
+  },
+  {
+    "fecha": "2026-11-04",
+    "autora": "Ellen Ochoa",
+    "frase": "No permitas que una frontera ajena se convierta en el límite de tus posibilidades.",
+    "descripcion": "Ingeniera y astronauta estadounidense; primera mujer hispana en viajar al espacio."
+  },
+  {
+    "fecha": "2026-11-05",
+    "autora": "Ada Lovelace",
+    "frase": "Imagina lo que todavía no existe y después encuentra la manera de construirlo.",
+    "descripcion": "Matemática británica, reconocida por sus aportaciones tempranas a la computación."
+  },
+  {
+    "fecha": "2026-11-06",
+    "autora": "Indra Nooyi",
+    "frase": "Dirigir también es elevar el estándar sin perder de vista a las personas.",
+    "descripcion": "Empresaria india-estadounidense; exdirectora ejecutiva de PepsiCo."
+  },
+  {
+    "fecha": "2026-11-07",
+    "autora": "Rigoberta Menchú",
+    "frase": "Tu voz adquiere fuerza cuando la utilizas para defender algo que importa.",
+    "descripcion": "Líder indígena guatemalteca y Premio Nobel de la Paz."
+  },
+  {
+    "fecha": "2026-11-08",
+    "autora": "Grace Hopper",
+    "frase": "No te conformes con repetir procesos: cuestiona, mejora y abre nuevas posibilidades.",
+    "descripcion": "Científica informática y contraalmirante estadounidense; pionera de la programación."
+  },
+  {
+    "fecha": "2026-11-09",
+    "autora": "Sara Blakely",
+    "frase": "No saber cómo se hace todavía no es una razón para renunciar a la idea.",
+    "descripcion": "Emprendedora estadounidense; fundadora de Spanx."
+  },
+  {
+    "fecha": "2026-11-10",
+    "autora": "Gabriela Mistral",
+    "frase": "La sensibilidad también puede ser una forma firme de liderazgo y transformación.",
+    "descripcion": "Poeta, educadora y diplomática chilena; primera latinoamericana en recibir el Nobel de Literatura."
+  },
+  {
+    "fecha": "2026-11-11",
+    "autora": "Mae Jemison",
+    "frase": "No reduzcas tus sueños para que quepan en las expectativas de otras personas.",
+    "descripcion": "Médica, ingeniera y astronauta estadounidense; primera mujer afroamericana en el espacio."
+  },
+  {
+    "fecha": "2026-11-12",
+    "autora": "Frida Kahlo",
+    "frase": "Convierte lo que has vivido en una voz propia; no necesitas parecerte a nadie.",
+    "descripcion": "Pintora mexicana reconocida por su obra autobiográfica y su lenguaje visual."
+  },
+  {
+    "fecha": "2026-11-13",
+    "autora": "Madam C. J. Walker",
+    "frase": "La independencia se construye cuando una habilidad se convierte en oportunidad.",
+    "descripcion": "Empresaria afroestadounidense; creó una compañía pionera de productos para el cuidado del cabello."
+  },
+  {
+    "fecha": "2026-11-14",
+    "autora": "Malala Yousafzai",
+    "frase": "El conocimiento amplía tus opciones; defender el derecho a aprender amplía las de todas.",
+    "descripcion": "Activista paquistaní por la educación de las niñas y Premio Nobel de la Paz."
+  },
+  {
+    "fecha": "2026-11-15",
+    "autora": "Rosalind Franklin",
+    "frase": "La evidencia merece atención, incluso cuando contradice lo que todos esperan encontrar.",
+    "descripcion": "Química y cristalógrafa británica; sus imágenes de difracción fueron clave para estudiar el ADN."
+  },
+  {
+    "fecha": "2026-11-16",
+    "autora": "Billie Jean King",
+    "frase": "La presión puede convertirse en impulso cuando sabes por qué estás compitiendo.",
+    "descripcion": "Tenista estadounidense y defensora de la igualdad en el deporte."
+  },
+  {
+    "fecha": "2026-11-17",
+    "autora": "Chimamanda Ngozi Adichie",
+    "frase": "Cuestionar una sola versión de la historia es el comienzo de una mirada más amplia.",
+    "descripcion": "Escritora nigeriana, reconocida por sus novelas y ensayos."
+  },
+  {
+    "fecha": "2026-11-18",
+    "autora": "Silvia Torres-Peimbert",
+    "frase": "La disciplina de investigar también exige humildad para seguir haciendo preguntas.",
+    "descripcion": "Astrónoma mexicana; primera mujer en dirigir la Unión Astronómica Internacional."
+  },
+  {
+    "fecha": "2026-11-19",
+    "autora": "Mary Barra",
+    "frase": "Los resultados sostenibles empiezan por asumir responsabilidad sobre las decisiones difíciles.",
+    "descripcion": "Ingeniera y ejecutiva estadounidense; directora ejecutiva de General Motors."
+  },
+  {
+    "fecha": "2026-11-20",
+    "autora": "Maya Angelou",
+    "frase": "Tu historia no tiene que ser sencilla para convertirse en una fuente de fortaleza.",
+    "descripcion": "Poeta, escritora y activista estadounidense por los derechos civiles."
+  },
+  {
+    "fecha": "2026-11-21",
+    "autora": "Serena Williams",
+    "frase": "La constancia no elimina los obstáculos; te prepara para responder cuando aparecen.",
+    "descripcion": "Tenista estadounidense, ganadora de múltiples títulos de Grand Slam."
+  },
+  {
+    "fecha": "2026-11-22",
+    "autora": "Jane Goodall",
+    "frase": "Observar con atención es el primer paso para comprender y transformar nuestro entorno.",
+    "descripcion": "Primatóloga y conservacionista británica; referente mundial en el estudio de chimpancés."
+  },
+  {
+    "fecha": "2026-11-23",
+    "autora": "Oprah Winfrey",
+    "frase": "Reconocer tu valor cambia la manera en que eliges tus oportunidades.",
+    "descripcion": "Empresaria, productora y comunicadora estadounidense."
+  },
+  {
+    "fecha": "2026-11-24",
+    "autora": "Yayoi Kusama",
+    "frase": "Una visión propia puede abrir un camino incluso cuando nadie más lo ve todavía.",
+    "descripcion": "Artista japonesa contemporánea, reconocida por sus instalaciones y patrones repetitivos."
+  },
+  {
+    "fecha": "2026-11-25",
+    "autora": "Eleanor Roosevelt",
+    "frase": "El crecimiento comienza cuando te atreves a hacer aquello que te intimida.",
+    "descripcion": "Diplomática y activista estadounidense; impulsora de la Declaración Universal de los Derechos Humanos."
+  },
+  {
+    "fecha": "2026-11-26",
+    "autora": "Brené Brown",
+    "frase": "La valentía no exige ausencia de dudas; exige actuar con honestidad a pesar de ellas.",
+    "descripcion": "Investigadora y autora estadounidense especializada en vulnerabilidad y liderazgo."
+  },
+  {
+    "fecha": "2026-11-27",
+    "autora": "Isabel Allende",
+    "frase": "El miedo puede acompañarte; no tiene por qué decidir el rumbo de tu vida.",
+    "descripcion": "Escritora chilena-estadounidense, autora de novelas y memorias."
+  },
+  {
+    "fecha": "2026-11-28",
+    "autora": "Marta Vieira da Silva",
+    "frase": "El talento necesita trabajo diario para convertirse en una trayectoria extraordinaria.",
+    "descripcion": "Futbolista brasileña, reconocida internacionalmente por su carrera."
+  },
+  {
+    "fecha": "2026-11-29",
+    "autora": "Shonda Rhimes",
+    "frase": "Cuando una oportunidad no existe, a veces el siguiente paso es crearla.",
+    "descripcion": "Guionista, productora y creadora estadounidense de series de televisión."
+  },
+  {
+    "fecha": "2026-11-30",
+    "autora": "Julieta Fierro",
+    "frase": "Mantén viva la curiosidad: aprender también es una manera de ampliar tu libertad.",
+    "descripcion": "Astrónoma y divulgadora científica mexicana."
+  }
+];
+function fechaMexico(){return new Intl.DateTimeFormat("en-CA",{timeZone:"America/Mexico_City",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date())}
+function mostrar(){
+ const hoy=fechaMexico(), m=mensajes.find(x=>x.fecha===hoy), el=document.getElementById("mensaje");
+ if(!m){el.innerHTML='<div class="moño">🎀</div><div class="titulo">Buenos días</div><div class="frase">Cada día es una nueva oportunidad para pensar con claridad y avanzar con intención.</div><div class="adgestia">ADGESTIA</div><div class="tagline">Administración y Gestión con IA</div>';return}
+ el.innerHTML='<div class="moño">🎀</div><div class="titulo">Buenos días</div><div class="frase">“'+m.frase+'”</div><div class="autora">Inspirada en '+m.autora+'</div><div class="descripcion">'+m.descripcion+'</div><div class="nota">Reflexión editorial de ADGESTIA; no es una cita textual.</div><div class="adgestia">ADGESTIA</div><div class="tagline">Administración y Gestión con IA</div>';
+}
+mostrar();setInterval(mostrar,60000);
+</script>
 </body>
 </html>
